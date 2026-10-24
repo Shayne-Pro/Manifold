@@ -1,4 +1,4 @@
-function [mean_accuracy,var_accuracy]=ten_HDC_GLSC(sub_dim,C,K)
+function [mean_accuracy,var_accuracy]=ten_HDC_GLSC(sub_dim,C,K,num_trials)
 % 计算GLSC在Extended yaleB上的十次平均值
 % Input:
 %     sub_dim: Grassmann流形上的子空间维度，相当于G(p,d)中的p
@@ -18,8 +18,12 @@ load random_index_extyaleB;
 load Extended_yaleB;
 num_class=28;
 num_sets_per_class=3;
-accuracy_rate=zeros(1,10);
-for num=1:1
+if nargin < 4
+    num_trials = 1;
+end
+validateattributes(num_trials, {'numeric'}, {'scalar','integer','positive','<=',numel(random_index)});
+accuracy_rate=zeros(1,num_trials);
+for num=1:num_trials
     %% 初始化训练集，测试集，及它们的标签
     X_Train=cell(84,1);
     X_Test=cell(168,1);
