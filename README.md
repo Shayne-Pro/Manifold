@@ -27,7 +27,7 @@ cd('/path/to/Manifold');
 
 Arguments are subspace dimension, local-model count, neighbor count, and optional trial count. Trials must not exceed the number of supplied split-index sets. Accuracy is returned as a fraction; variance is calculated over the trials actually executed. A single trial therefore has zero sample variance.
 
-The historical function name includes `ten`, but the old body only executed one split while averaging a ten-element array with unused zero entries. The optional trial count makes the execution and summary consistent. Algorithm parameters and the supplied data are otherwise preserved.
+The historical function name includes `ten`, but the old body only executed one split while averaging a ten-element array with unused zero entries. The optional trial count makes the execution and summary consistent. Intermediate cluster, subspace, and prediction arrays are reset for each split so later trials cannot reuse an earlier trial's state. Algorithm parameters and the supplied data are otherwise preserved.
 
 ## Reproduction status
 

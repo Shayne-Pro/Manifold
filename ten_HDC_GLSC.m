@@ -24,6 +24,8 @@ end
 validateattributes(num_trials, {'numeric'}, {'scalar','integer','positive','<=',numel(random_index)});
 accuracy_rate=zeros(1,num_trials);
 for num=1:num_trials
+    % Each split must build its own arrays; never reuse previous trial state.
+    clear trn_cluster tst_cluster trn_subspace tst_subspace tst_label;
     %% 初始化训练集，测试集，及它们的标签
     X_Train=cell(84,1);
     X_Test=cell(168,1);
